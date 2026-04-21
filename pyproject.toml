@@ -1,0 +1,27 @@
+[project]
+name = "backend"
+version = "0.1.0"
+description = "Add your description here"
+requires-python = ">=3.9"
+dependencies = [
+    "celery>=5.6.3",
+    "channels-redis>=4.3.0",
+    "django>=4.2.30",
+    "django-channels>=0.7.0",
+    "django-cors-headers>=4.9.0",
+    "django-filter>=25.1",
+    "djangorestframework>=3.16.1",
+    "djangorestframework-simplejwt>=5.5.1",
+    "psycopg2-binary>=2.9.12",
+    "python-dotenv>=1.2.1",
+    "redis>=7.0.1",
+]
+
+[dependency-groups]
+dev = [
+    "factory-boy>=3.3.3",
+    "pytest>=8.4.2",
+    "pytest-cov>=7.1.0",
+    "pytest-django>=4.11.1",
+    "ruff>=0.15.11",
+]

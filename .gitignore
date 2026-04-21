@@ -1,0 +1,25 @@
+cat > .gitignore << 'EOF'
+# Environment
+.env
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+*.egg-info/
+
+# uv
+.python-version
+
+# Django
+*.log
+staticfiles/
+mediafiles/
+
+# VS Code
+.vscode/
+
+# macOS
+.DS_Store
+EOF
