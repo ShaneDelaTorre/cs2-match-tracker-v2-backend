@@ -42,7 +42,7 @@ services:
 
   celery:
     build: .
-    command: celery -A cs2_tracker worker -l info
+    command: python -m celery -A cs2_tracker worker -l info
     volumes:
       - .:/app
     env_file:
