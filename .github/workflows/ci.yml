@@ -28,11 +28,11 @@ jobs:
     env:
       SECRET_KEY: ci-secret-key-not-used-in-production
       DEBUG: "True"
-      DB_NAME: cs2_tracker
-      DB_USER: cs2_tracker_user
-      DB_PASSWORD: cs2_tracker_pass
-      DB_HOST: localhost
-      DB_PORT: 5432
+      POSTGRES_DB: cs2_tracker
+      POSTGRES_USER: cs2_tracker_user
+      POSTGRES_PASSWORD: cs2_tracker_pass
+      POSTGRES_HOST: localhost
+      POSTGRES_PORT: 5432
       ALLOWED_HOSTS: localhost
       REDIS_URL: redis://localhost:6379/0
 
