@@ -44,11 +44,11 @@ psql:
 
 # Run tests
 test:
-    docker compose exec api pytest
+    docker-compose run --rm test pytest
 
 # Run tests with coverage
 test-cov:
-    docker compose exec api pytest --cov
+    docker-compose run --rm test pytest --cov
 
 # Lint with ruff
 lint:
