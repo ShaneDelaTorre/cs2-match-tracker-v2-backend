@@ -40,6 +40,18 @@ services:
       redis:
         condition: service_healthy
 
+  test:
+    build:
+      context: .
+      target: test
+    volumes:
+      - .:/app
+    env_file:
+      - .env
+    depends_on:
+      db:
+        condition: service_healthy
+
   celery:
     build: .
     command: python -m celery -A cs2_tracker worker -l info
