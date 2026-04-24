@@ -13,6 +13,7 @@ from accounts.services import (
     send_friend_request,
     respond_to_friend_request,
     are_friends,
+    get_career_summary,
 )
 from core.permissions import IsOwnerOrAdmin
 
@@ -23,6 +24,12 @@ class OwnProfileView(generics.RetrieveUpdateAPIView):
 
     def get_object(self):
         return self.request.user
+    
+    def retrieve(self, request, *args, **kwargs):
+        user = self.get_object()
+        data = UserSerializer(user).data
+        data["career_summary"] = get_career_summary(user)
+        return Response(data)
 
 
 class PublicProfileView(generics.RetrieveAPIView):
@@ -30,6 +37,12 @@ class PublicProfileView(generics.RetrieveAPIView):
     serializer_class = PublicUserSerializer
     queryset = User.objects.all()
 
+    def retrieve(self, request, *args, **kwargs):
+        user = self.get_object()
+        data = PublicUserSerializer(user).data
+        data["career_summary"] = get_career_summary(user)
+        data["are_friends"] = are_friends(request.user, user)
+        return Response(data)
 
 class FriendRequestListCreateView(generics.GenericAPIView):
     permission_classes = [permissions.IsAuthenticated]
