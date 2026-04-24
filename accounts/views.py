@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.shortcuts import get_object_or_404
 from accounts.models import User, FriendRequest
+from django.db.models import Q
 from accounts.serializers import (
     UserSerializer,
     PublicUserSerializer,
@@ -82,3 +83,21 @@ class FriendRequestRespondView(APIView):
             return Response({"detail": str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
         return Response(FriendRequestSerializer(fr).data)
+    
+
+class FriendsListView(generics.ListAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = PublicUserSerializer
+
+    def get_queryset(self):
+        user = self.request.user
+        accepted = FriendRequest.objects.filter(
+            Q(sender=user) | Q(receiver=user),
+            status=FriendRequest.Status.ACCEPTED,
+        ).values_list("sender_id", "receiver_id")
+
+        friend_ids = set()
+        for sender_id, receiver_id in accepted:
+            friend_ids.add(sender_id if sender_id != user.id else receiver_id)
+
+        return User.objects.filter(id__in=friend_ids)

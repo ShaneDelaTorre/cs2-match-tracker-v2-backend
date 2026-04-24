@@ -4,6 +4,7 @@ from accounts.views import (
     PublicProfileView,
     FriendRequestListCreateView,
     FriendRequestRespondView,
+    FriendsListView,
 )
 
 urlpatterns = [
@@ -11,4 +12,5 @@ urlpatterns = [
     path("users/<int:pk>/", PublicProfileView.as_view(), name="public-profile"),
     path("friend-requests/", FriendRequestListCreateView.as_view(), name="friend-requests"),
     path("friend-requests/<int:pk>/respond/", FriendRequestRespondView.as_view(), name="friend-request-respond"),
+    path("friends/", FriendsListView.as_view(), name="user-friends")
 ]
