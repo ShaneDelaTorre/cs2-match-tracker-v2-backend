@@ -1,0 +1,55 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      db:
+        image: postgres:16
+        env:
+          POSTGRES_DB: cs2_tracker
+          POSTGRES_USER: cs2_tracker_user
+          POSTGRES_PASSWORD: cs2_tracker_password
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 5
+
+    env:
+      SECRET_KEY: ci-secret-key-not-used-in-production
+      DEBUG: "True"
+      DB_NAME: cs2_tracker
+      DB_USER: cs2_tracker_user
+      DB_PASSWORD: cs2_tracker_password
+      DB_HOST: localhost
+      DB_PORT: 5432
+      ALLOWED_HOSTS: localhost
+      REDIS_URL: redis://localhost:6379/0
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+
+      - name: Install dependencies
+        run: uv sync --frozen
+
+      - name: Run tests
+        run: uv run pytest --cov
