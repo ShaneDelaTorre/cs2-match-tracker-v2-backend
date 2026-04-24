@@ -16,7 +16,7 @@ jobs:
         env:
           POSTGRES_DB: cs2_tracker
           POSTGRES_USER: cs2_tracker_user
-          POSTGRES_PASSWORD: cs2_tracker_password
+          POSTGRES_PASSWORD: cs2_tracker_pass
         ports:
           - 5432:5432
         options: >-
@@ -30,7 +30,7 @@ jobs:
       DEBUG: "True"
       DB_NAME: cs2_tracker
       DB_USER: cs2_tracker_user
-      DB_PASSWORD: cs2_tracker_password
+      DB_PASSWORD: cs2_tracker_pass
       DB_HOST: localhost
       DB_PORT: 5432
       ALLOWED_HOSTS: localhost
