@@ -24,6 +24,7 @@ class Match(models.Model):
     game_mode = models.CharField(max_length=24, choices=GameMode.choices, default=GameMode.PREMIER)
     team_score = models.PositiveSmallIntegerField()
     opponent_score = models.PositiveSmallIntegerField()
+    result = models.CharField(max_length=4, choices=Result.choices)
     duration = models.PositiveSmallIntegerField(help_text="Duration in minutes")
     played_at = models.DateTimeField()
 
