@@ -6,6 +6,14 @@ default:
 build:
     docker compose build
 
+# Check running containers
+ps:
+    docker ps
+
+# Check all containers
+psa:
+    docker ps -a
+
 # Start all services
 up:
     docker compose up
