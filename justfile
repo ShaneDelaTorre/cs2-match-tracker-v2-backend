@@ -6,6 +6,10 @@ default:
 build:
     docker compose build
 
+# Build only api image
+just b-api:
+    docker compose build api
+
 # Check running containers
 ps:
     docker ps
