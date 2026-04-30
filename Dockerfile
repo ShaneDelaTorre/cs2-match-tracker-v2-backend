@@ -59,4 +59,4 @@ ENV PATH="/opt/venv/bin:$PATH" \
 
 EXPOSE 8000
 
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["uvicorn", "cs2_tracker.asgi:application", "--host", "0.0.0.0", "--port", "8000"]
