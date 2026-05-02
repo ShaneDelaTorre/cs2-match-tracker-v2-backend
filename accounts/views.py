@@ -15,7 +15,6 @@ from accounts.services import (
     are_friends,
     get_career_summary,
 )
-from core.permissions import IsOwnerOrAdmin
 
 
 class OwnProfileView(generics.RetrieveUpdateAPIView):
@@ -43,6 +42,14 @@ class PublicProfileView(generics.RetrieveAPIView):
         data["career_summary"] = get_career_summary(user)
         data["are_friends"] = are_friends(request.user, user)
         return Response(data)
+    
+class AccountSearchView(generics.ListAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = PublicUserSerializer
+    search_fields = ["username"]
+
+    def get_queryset(self):
+        return User.objects.exclude(id=self.request.user.id)
 
 class FriendRequestListCreateView(generics.GenericAPIView):
     permission_classes = [permissions.IsAuthenticated]
