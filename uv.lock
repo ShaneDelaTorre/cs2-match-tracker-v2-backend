@@ -44,7 +44,6 @@ dependencies = [
     { name = "channels" },
     { name = "channels-redis" },
     { name = "django" },
-    { name = "django-channels" },
     { name = "django-cors-headers" },
     { name = "django-filter" },
     { name = "djangorestframework" },
@@ -52,10 +51,12 @@ dependencies = [
     { name = "djoser" },
     { name = "factory-boy" },
     { name = "faker" },
+    { name = "feedparser" },
     { name = "psycopg2-binary" },
     { name = "pytest" },
     { name = "pytest-cov" },
     { name = "pytest-django" },
+    { name = "python-dateutil" },
     { name = "python-dotenv" },
     { name = "redis" },
     { name = "uvicorn", extra = ["standard"] },
@@ -76,7 +77,6 @@ requires-dist = [
     { name = "channels", specifier = ">=4.3.2" },
     { name = "channels-redis", specifier = ">=4.3.0" },
     { name = "django", specifier = ">=4.2.30" },
-    { name = "django-channels", specifier = ">=0.7.0" },
     { name = "django-cors-headers", specifier = ">=4.9.0" },
     { name = "django-filter", specifier = ">=25.1" },
     { name = "djangorestframework", specifier = ">=3.16.1" },
@@ -84,10 +84,12 @@ requires-dist = [
     { name = "djoser", specifier = ">=2.3.3" },
     { name = "factory-boy", specifier = ">=3.3.3" },
     { name = "faker", specifier = ">=40.15.0" },
+    { name = "feedparser", specifier = ">=6.0.12" },
     { name = "psycopg2-binary", specifier = ">=2.9.12" },
     { name = "pytest", specifier = ">=9.0.3" },
     { name = "pytest-cov", specifier = ">=7.1.0" },
     { name = "pytest-django", specifier = ">=4.12.0" },
+    { name = "python-dateutil", specifier = ">=2.9.0.post0" },
     { name = "python-dotenv", specifier = ">=1.2.1" },
     { name = "redis", specifier = ">=7.0.1" },
     { name = "uvicorn", extras = ["standard"], specifier = ">=0.46.0" },
@@ -474,20 +476,6 @@ wheels = [
 ]
 
 [[package]]
-name = "django-channels"
-version = "0.7.0"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "requests" },
-    { name = "requests-oauthlib" },
-    { name = "six" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/c2/c2/0fdebf20672aa4b007d43e6563cf7c9e3e32a3700ba548eeefdc7a84211c/django-channels-0.7.0.tar.gz", hash = "sha256:c8bc623df4a7828c2e5ea453d0d0f066ff9b71b8c7c1a58b2f7fa86bc0bd619e", size = 5718, upload-time = "2016-10-04T07:49:48.797Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/ea/2d/b8bfeda52e60495b73cc58ac30b676fc9a39008f0c9b68a0eb529768244b/django_channels-0.7.0-py3-none-any.whl", hash = "sha256:ceb5675ed0133bd54cc0529eb76157cc3b9ab67aceba7293ee5ac2fe4126987b", size = 9487, upload-time = "2016-10-04T07:51:31.322Z" },
-]
-
-[[package]]
 name = "django-cors-headers"
 version = "4.9.0"
 source = { registry = "https://pypi.org/simple" }
@@ -575,6 +563,18 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/7f/13/6741787bd91c4109c7bed047d68273965cd52ce8a5f773c471b949334b6d/faker-40.15.0.tar.gz", hash = "sha256:20f3a6ec8c266b74d4c554e34118b21c3c2056c0b4a519d15c8decb3a4e6e795", size = 1967447, upload-time = "2026-04-17T20:05:27.555Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/a7/a7/a600f8f30d4505e89166de51dd121bd540ab8e560e8cf0901de00a81de8c/faker-40.15.0-py3-none-any.whl", hash = "sha256:71ab3c3370da9d2205ab74ffb0fd51273063ad562b3a3bb69d0026a20923e318", size = 2004447, upload-time = "2026-04-17T20:05:25.437Z" },
+]
+
+[[package]]
+name = "feedparser"
+version = "6.0.12"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "sgmllib3k" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/dc/79/db7edb5e77d6dfbc54d7d9df72828be4318275b2e580549ff45a962f6461/feedparser-6.0.12.tar.gz", hash = "sha256:64f76ce90ae3e8ef5d1ede0f8d3b50ce26bcce71dd8ae5e82b1cd2d4a5f94228", size = 286579, upload-time = "2025-09-10T13:33:59.486Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/4e/eb/c96d64137e29ae17d83ad2552470bafe3a7a915e85434d9942077d7fd011/feedparser-6.0.12-py3-none-any.whl", hash = "sha256:6bbff10f5a52662c00a2e3f86a38928c37c48f77b3c511aedcd51de933549324", size = 81480, upload-time = "2025-09-10T13:33:58.022Z" },
 ]
 
 [[package]]
@@ -949,6 +949,12 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/3a/5e/c927b325bd4c1d3620211a4b96f47864633199feed60fa936025ab27e090/ruff-0.15.11-py3-none-win_amd64.whl", hash = "sha256:8b6756d88d7e234fb0c98c91511aae3cd519d5e3ed271cae31b20f39cb2a12a3", size = 11779692, upload-time = "2026-04-16T18:46:17.268Z" },
     { url = "https://files.pythonhosted.org/packages/63/b6/aeadee5443e49baa2facd51131159fd6301cc4ccfc1541e4df7b021c37dd/ruff-0.15.11-py3-none-win_arm64.whl", hash = "sha256:063fed18cc1bbe0ee7393957284a6fe8b588c6a406a285af3ee3f46da2391ee4", size = 11032614, upload-time = "2026-04-16T18:46:34.487Z" },
 ]
+
+[[package]]
+name = "sgmllib3k"
+version = "1.0.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/9e/bd/3704a8c3e0942d711c1299ebf7b9091930adae6675d7c8f476a7ce48653c/sgmllib3k-1.0.0.tar.gz", hash = "sha256:7868fb1c8bfa764c1ac563d3cf369c381d1325d36124933a726f29fcdaa812e9", size = 5750, upload-time = "2010-08-24T14:33:52.445Z" }
 
 [[package]]
 name = "six"
