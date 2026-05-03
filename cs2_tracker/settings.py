@@ -14,6 +14,8 @@ from pathlib import Path
 from datetime import timedelta
 import os
 from dotenv import load_dotenv
+from celery.schedules import crontab
+
 
 load_dotenv()
 
@@ -123,6 +125,12 @@ CELERY_RESULT_BACKEND = REDIS_URL
 CELERY_ACCEPT_CONTENT = ["json"]
 CELERY_TASK_SERIALIZER = "json"
 
+CELERY_BEAT_SCHEDULE = {
+    "fetch-news-every-10-minutes": {
+        "task": "news.tasks.fetch_news",
+        "schedule": crontab(minute="*/10"),
+    }
+}
 # Auth ------------------------------------------------------
 AUTH_USER_MODEL = "accounts.User"
 
