@@ -23,3 +23,9 @@ mediafiles/
 # macOS
 .DS_Store
 EOF
+
+# Celery binary files
+celerybeat-schedule
+celerybeat-schedule.db
+celerybeat-schedule-shm
+celerybeat-schedule-wal
