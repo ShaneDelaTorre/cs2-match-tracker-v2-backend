@@ -7,7 +7,7 @@ build:
     docker compose build
 
 # Build only api image
-just b-api:
+b-api:
     docker compose build api
 
 # Check running containers
@@ -45,6 +45,14 @@ makemigrations:
 # Create superuser
 superuser:
     docker compose exec api python manage.py createsuperuser
+
+# Run seed command
+seed:
+    docker-compose exec api python manage.py seed
+
+# Run seed for News Source
+seed_news:
+    docker-compose exec api python manage.py seed_news
 
 # Django shell
 shell:
