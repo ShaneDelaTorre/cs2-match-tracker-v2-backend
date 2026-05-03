@@ -65,5 +65,19 @@ services:
       redis:
         condition: service_healthy
 
+
+  celery-beat:
+    build: .
+    command: python -m celery -A cs2_tracker beat -l info
+    volumes:
+      - .:/app
+    env_file:
+      - .env
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
 volumes:
   postgres_data:
