@@ -6,9 +6,9 @@ default:
 build:
     docker compose build
 
-# Build only api image
-b-api:
-    docker compose build api
+# Build a specific image or service
+build-img img:
+    docker compose build {{img}}
 
 # Check running containers
 ps:
