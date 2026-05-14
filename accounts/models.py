@@ -18,6 +18,7 @@ class User(AbstractUser):
     rank = models.CharField(max_length=30, choices=RankChoices.choices, default=RankChoices.UNRANKED)
     bio = models.TextField(blank=True, default="")
     avatar_url = models.URLField(blank=True, default="")
+    google_id = models.CharField(max_length=128, unique=True, null=True, blank=True)
 
     def __str__(self):
         return f"User: {self.username} | Rank: {self.rank}"
