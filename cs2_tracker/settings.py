@@ -187,6 +187,10 @@ DJOSER = {
     },
 }
 
+# Google SSO config --------------------------------
+GOOGLE_CLIENT_ID = os.getenv("GOOGLE_CLIENT_ID")
+GOOGLE_CLIENT_SECRET = os.getenv("GOOGLE_CLIENT_SECRET")
+
 # CORS --------------------------------------------
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
