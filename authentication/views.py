@@ -19,6 +19,14 @@ oauth.register(
     client_kwargs={"scope": "openid email profile"},
 )
 
+oauth.register(
+    name="microsoft",
+    client_id=settings.MICROSOFT_CLIENT_ID,
+    client_secret=settings.MICROSOFT_CLIENT_SECRET,
+    server_metadata_url="https://login.microsoftonline.com/common/v2.0/.well-known/openid-configuration",
+    client_kwargs={"scope": "openid email profile"},
+)
+
 class CookieTokenObtainPairView(TokenObtainPairView):
     def post(self, request, *args, **kwargs):
         response = super().post(request, *args, **kwargs)
