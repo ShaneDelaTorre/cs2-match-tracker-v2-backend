@@ -37,3 +37,15 @@ class FriendRequest(models.Model):
 
     class Meta:
         unique_together = ("sender", "receiver")
+
+class SocialAccount(models.Model):
+    class Provider(models.TextChoices):
+        GOOGLE = "google"
+        MICROSOFT = "microsoft"
+
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="social_accounts")
+    provider = models.CharField(max_length=32, choices=Provider.choices)
+    provider_id = models.CharField(max_length=128)
+
+    class Meta:
+        unique_together = ("provider", "provider_id")
