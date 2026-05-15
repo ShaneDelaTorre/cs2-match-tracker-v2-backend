@@ -18,6 +18,7 @@ class User(AbstractUser):
     rank = models.CharField(max_length=30, choices=RankChoices.choices, default=RankChoices.UNRANKED)
     bio = models.TextField(blank=True, default="")
     avatar_url = models.URLField(blank=True, default="")
+    google_id = models.CharField(max_length=128, unique=True, null=True, blank=True)
 
     def __str__(self):
         return f"User: {self.username} | Rank: {self.rank}"
@@ -36,3 +37,15 @@ class FriendRequest(models.Model):
 
     class Meta:
         unique_together = ("sender", "receiver")
+
+class SocialAccount(models.Model):
+    class Provider(models.TextChoices):
+        GOOGLE = "google"
+        MICROSOFT = "microsoft"
+
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="social_accounts")
+    provider = models.CharField(max_length=32, choices=Provider.choices)
+    provider_id = models.CharField(max_length=128)
+
+    class Meta:
+        unique_together = ("provider", "provider_id")

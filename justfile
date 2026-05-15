@@ -38,9 +38,13 @@ down-v:
 migrate:
     docker compose exec api python manage.py migrate
 
-# Make migrations
+# Make migrations to all apps
 makemigrations:
     docker compose exec api python manage.py makemigrations
+
+# Make migrations to a certain app
+mm app:
+    docker compose exec api python manage.py makemigrations {{app}}
 
 # Create superuser
 superuser:

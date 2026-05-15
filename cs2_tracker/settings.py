@@ -187,6 +187,16 @@ DJOSER = {
     },
 }
 
+# Google SSO config --------------------------------
+GOOGLE_CLIENT_ID = os.getenv("GOOGLE_CLIENT_ID")
+GOOGLE_CLIENT_SECRET = os.getenv("GOOGLE_CLIENT_SECRET")
+
+
+# Microsoft SSO config --------------------------------
+MICROSOFT_CLIENT_ID = os.getenv("MICROSOFT_CLIENT_ID")
+MICROSOFT_CLIENT_SECRET = os.getenv("MICROSOFT_CLIENT_SECRET")
+MICROSOFT_TENANT_ID = os.getenv("MICROSOFT_TENANT_ID")
+
 # CORS --------------------------------------------
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
